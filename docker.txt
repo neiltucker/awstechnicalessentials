@@ -1,0 +1,36 @@
+# Docker Install
+sudo yum install -y yum-utils
+sudo yum update -y
+sudo amazon-linux-extras install docker -y
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+sudo docker info
+
+#!/bin/bash -ex
+yum install -y yum-utils
+yum update -y
+amazon-linux-extras install docker -y
+service docker start
+usermod -a -G docker ec2-user
+
+
+# Create Docker Image / registry.access.redhat.com/rhel7/rhel /
+# sudo service docker start
+# sudo docker rmi emp-app
+sudo aws s3 cp s3://awstecess02/Dockerfile .
+sudo docker build -t emp-app .
+sudo docker images
+sudo docker run -t -i -p 80:80 emp-app
+sudo docker run -t -i -p 80:80 2b9bbadc3b8c 
+
+# Manage image with ECR
+sudo aws ecr create-repository --repository-name emp-app-rep --region us-east-1
+sudo aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 895908483226.dkr.ecr.us-east-1.amazonaws.com
+sudo docker build -t emp-app-repo .
+sudo docker tag emp-app-repo:latest 895908483226.dkr.ecr.us-east-1.amazonaws.com/emp-app-repo:latest
+sudo docker push 895908483226.dkr.ecr.us-east-1.amazonaws.com/emp-app-repo:latest
+
+
+
+
+

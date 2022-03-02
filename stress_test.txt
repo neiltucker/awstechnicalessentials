@@ -1,0 +1,10 @@
+### Stress Test Amazon Linux EC2 instance
+
+sudo amazon-linux-extras install epel -y
+
+sudo yum install stress -y
+
+sudo yum install stress-ng -y
+
+stress-ng -c 4 -m 4 -i 4 -t 30s
+

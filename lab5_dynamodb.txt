@@ -1,0 +1,19 @@
+*** /var/app/api/common/constants.js
+*** curl ifconfig.io
+DEFAULT_AWS_REGION="us-east-1"
+PHOTOS_BUCKET="awstecess01"
+sudo npm start
+killall -9 node
+
+
+
+aws dynamodb create-table \
+    --table-name Employees \
+    --attribute-definitions AttributeName=id,AttributeType=S \
+    --key-schema AttributeName=id,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 
+
+
+
+aws dynamodb create-table --table-name Employees2 --attribute-definitions AttributeName=id,AttributeType=S AttributeName=name,AttributeType=S --key-schema AttributeName=id,KeyType=HASH AttributeName=name,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 
+

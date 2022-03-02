@@ -1,0 +1,10 @@
+# Create IAM user account
+
+# Demonstrate use of CloudShell
+
+# Create user account using AWS Management Console (IAM)
+
+# Create user account using AWS CLI
+aws iam create-user --user-name John
+
+
