@@ -1,11 +1,11 @@
-User Data:
 #!/bin/bash -ex
+#note: user-data script is run as root so strictly none of the sudo's are required.
 
 # Update yum
 sudo yum -y update
 
 # Add node's source repo
-sudo curl -sL https://rpm.nodesource.com/setup_14.x | bash -
+curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
 
 # Install nodejs
 sudo yum -y install nodejs
@@ -14,7 +14,7 @@ sudo yum -y install nodejs
 sudo mkdir -p /var/app
 
 # Get the app from S3
-sudo wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/ILT-TF-100-TECESS-5/app/app.zip
+wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/ILT-TF-100-TECESS-5/app/app.zip
 
 # Unzip it into a specific folder
 sudo unzip -o app.zip -d /var/app/
@@ -29,6 +29,6 @@ sudo sed -i "s+process.env.SHOW_ADMIN_TOOLS || 0+process.env.SHOW_ADMIN_TOOLS ||
 sudo npm install
 
 # Start your app
-sudo npm start
+nohup sudo npm start >/tmp/npm-start 2>&1 &
 
 
