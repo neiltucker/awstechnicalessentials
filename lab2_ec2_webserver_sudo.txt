@@ -1,4 +1,5 @@
 #!/bin/bash -ex
+#note: user-data script is run as root so strictly none of the sudo's are required.
 
 # Update yum
 sudo yum -y update
@@ -28,6 +29,6 @@ sudo sed -i "s+process.env.SHOW_ADMIN_TOOLS || 0+process.env.SHOW_ADMIN_TOOLS ||
 sudo npm install
 
 # Start your app
-sudo npm start
+nohup sudo npm start >/tmp/npm-start 2>&1 &
 
 
